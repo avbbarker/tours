@@ -17,10 +17,22 @@ fetch("http://localhost:3000/langs")
     .then(response => 5)
     .then(randomName => console.log(randomName))
 
+function addLang(Lang){
+    console.log(lang)
+    const p = document.createElement('p')
+    const container = document.querySelector('#')
+    p.innerText = lang.name
+    p.addEventListener('click', (e)=>{
+        e.target.style.color = 'red'
+    })
+    container.appendChild(p)   
+}
+
 fetch("http://localhost:3000/langs")
 .then(response => response.json())
-.then(langs => langs.forEach(lang => console.log(lang)))
+.then(langs => langs.forEach(lang => addLang(Lang)))
 .catch(error => console.log(`printing the error: ${error}`))
+
 
 console.log("This runs before the fetch")
 
