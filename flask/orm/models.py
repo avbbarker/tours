@@ -11,6 +11,11 @@ class User(db.Model):
 
     blogs = db.relationship("Blog", back_populates="user")
 
+    @validates("name")
+    def validate_name(self, key: str, name: str):
+        if len(name) < 0:
+            raise ValueError("name must be at least")
+
     def to_dict(self):
         return {"id": self.id, "name": self.name}
 
@@ -52,4 +57,4 @@ class Tag(db.Model):
     blog_tags = db.relationship("BlogTag", back_populates="tag")
 
     def to_dict(self):
-        return {"text": self.text}
+        return {"id": self.id, "text": self.text}
